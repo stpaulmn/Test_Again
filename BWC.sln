@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.2092
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "BWC", "BWC\BWC.dtproj", "{B1AA3C0E-EBE1-4B5D-BBC6-20DB04B46E01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1AA3C0E-EBE1-4B5D-BBC6-20DB04B46E01}.Development|Default.ActiveCfg = Development
+		{B1AA3C0E-EBE1-4B5D-BBC6-20DB04B46E01}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDFC52B2-7E01-45DB-9ED1-0C992F211526}
+	EndGlobalSection
+EndGlobal

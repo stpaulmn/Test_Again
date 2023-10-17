@@ -1,0 +1,2617 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/30/2018 8:02:55 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="OT17-S270-A006"
+  DTS:CreatorName="STPAUL\engelkin"
+  DTS:DTSID="{9C3A2786-C788-43D4-AD50-6522395F945D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="EvidenceAttributes"
+  DTS:PackageType="5"
+  DTS:VersionBuild="112"
+  DTS:VersionGUID="{CEA1FD53-6D7C-4268-BE8D-8BA8997D312D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Failed Upload - Create Archive File]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{2298C11D-B4E5-4A41-A1B6-22383758BEBD}"
+      DTS:ObjectName="Failed Upload - Create Archive File">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"\\\\CH-1\\Shared\\IS\\Business Intelligence\\SPPDData\\BWCData\\Archive\\EvidenceAttributes\\FailedUpload\\"+ "EvidenceAttributes_FAILED_" + (DT_WSTR,4)DATEPART("yyyy",GetDate()) +
+RIGHT("0" + (DT_WSTR,2)DATEPART("mm",GetDate()) ,2) +
+RIGHT("0" + (DT_WSTR,2)DATEPART("dd",GetDate()),2) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("hh",GetDate()),2)+
+RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) + 
+RIGHT("0" + (DT_WSTR,2)DATEPART("ss",GetDate()),2) +".csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="\\CH-1\Shared\IS\Business Intelligence\SPPDData\BWCData\Archive\EvidenceAttributes\FailedUpload\EvidenceAttributes_FAILED_20230306_111301.csv" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Souce Data CSV File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{FA0A5DDF-E188-4BD0-BD77-A3A6C98994EA}"
+      DTS:ObjectName="Souce Data CSV File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\CH-1\Shared\IS\Business Intelligence\SPPDData\BWCData\API\EvidenceAttributes.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="36"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EvidenceID"
+              DTS:DTSID="{C3540032-78E7-47DE-953D-3E6BBB0DE66E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EvidenceType"
+              DTS:DTSID="{5454181C-15BE-4301-88B1-FAAF7DAD605D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="status"
+              DTS:DTSID="{A11B3F21-A92F-409A-BD04-DD2C611E36AF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="200"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="title"
+              DTS:DTSID="{AB577652-DEA4-4132-9562-074C2A271B72}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="description"
+              DTS:DTSID="{FB070A6D-2C56-4A12-9550-B3A8E935AB8C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="externalId"
+              DTS:DTSID="{7733AF0C-FCAC-4C86-9633-ED325947E4E3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="recordedOn"
+              DTS:DTSID="{C3F4F6D3-C75D-4E92-8F80-824BF8B16DA6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="uploadedOn"
+              DTS:DTSID="{EE92B016-C47C-4A9C-8D85-EBD308EF0D0F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="modifiedOn"
+              DTS:DTSID="{B22B07AC-7F0F-4376-9D69-FAA62DCA437B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="duration"
+              DTS:DTSID="{20505992-32F4-4854-878D-49D6AF821ABE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="size"
+              DTS:DTSID="{9068387F-D0DA-4DBE-9803-66D8F6117C0D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fileType"
+              DTS:DTSID="{B492C7EC-608B-46EF-B05B-28FC72BD4752}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="notes"
+              DTS:DTSID="{1E937B42-1B89-4E36-B6F4-F4A8E21D91EA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="deletionTime"
+              DTS:DTSID="{9A10DB96-917E-4675-9ED3-854F5F8073EC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="302"
+              DTS:TextQualified="True"
+              DTS:ObjectName="location"
+              DTS:DTSID="{9A01433B-BA6B-4071-B2C8-1D8D7C19D911}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="sourceChannel"
+              DTS:DTSID="{46DC0002-0C90-4D3D-B50D-5187A47FBEFE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="storageTier"
+              DTS:DTSID="{4F11A010-8A3B-45CC-BF40-55A76B45CCD1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="contentType"
+              DTS:DTSID="{171CCAC0-2CCD-45B1-8D2F-D0EE59923CC4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="2000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="evidenceCaseIds"
+              DTS:DTSID="{3DAC603A-4B57-49C7-A647-23862E496A62}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="restrictionLevel"
+              DTS:DTSID="{88B52B98-7B6E-41A9-BB78-C1DB18351829}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Successful Upload - Create Archive File]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{98D7D787-E034-459E-94EC-FEC7ABF79CE7}"
+      DTS:ObjectName="Successful Upload - Create Archive File">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"\\\\CH-1\\Shared\\IS\\Business Intelligence\\SPPDData\\BWCData\\Archive\\EvidenceAttributes\\SuccessfulUpload\\"+ "EvidenceAttributes_SUCCESS_" + (DT_WSTR,4)DATEPART("yyyy",GetDate()) +
+RIGHT("0" + (DT_WSTR,2)DATEPART("mm",GetDate()) ,2) +
+RIGHT("0" + (DT_WSTR,2)DATEPART("dd",GetDate()),2) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("hh",GetDate()),2)+
+RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) + 
+RIGHT("0" + (DT_WSTR,2)DATEPART("ss",GetDate()),2) +".csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="\\CH-1\Shared\IS\Business Intelligence\SPPDData\BWCData\Archive\EvidenceAttributes\SuccessfulUpload\EvidenceAttributes_SUCCESS_20230306_111301.csv" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{61F14E5E-6DB4-45F7-9BAF-5611BEA0E6D1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vAuditBatchLoadID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0D5F4918-0FFF-4618-A9CD-8339FCFF251D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vDeleteRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{125E7CDD-8BD9-43FE-9E7A-FF73C43A246B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vDuplicateRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5DD6DD16-150E-45F4-B80E-BE482BCCF81A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vEndingRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8AA43D78-5C64-4118-9619-3CDD5E48AA87}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vErrorRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{62694A09-79E5-48D4-BA1D-2D80E148E542}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vInitialRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AB706060-985A-45EA-B15B-B9CB72565475}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vInsertRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D9604034-01FC-4DCC-B128-5C06A7229F18}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;SELECT ISNULL(DATEADD(WEEK,-1,CAST(MAX(SourceModifyDateUTC) AS DATE)),'1/1/1900') AS ModifyDateCheck FROM &quot; + @[User::vSchema]  + &quot;.&quot; + @[User::vTableName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vMaxModifyDateQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT ISNULL(DATEADD(WEEK,-1,CAST(MAX(SourceModifyDateUTC) AS DATE)),'1/1/1900') AS ModifyDateCheck FROM dbo.EvidenceAttributes</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F9C0903A-233E-4CEE-8764-E8E90F65C2AA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vMaxModifyDateUTC">
+      <DTS:VariableValue
+        DTS:DataType="7">12:00:00 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{887E7288-65CC-4115-A9E9-3C6A1B8C33F2}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vSchema">
+      <DTS:VariableValue
+        DTS:DataType="8">dbo</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EA045153-E962-475E-AA47-701AE8B9AD18}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vTableName">
+      <DTS:VariableValue
+        DTS:DataType="8">EvidenceAttributes</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{26F59C02-711B-49F7-91D8-036B9ECAE375}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vTotalRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DD0A9FE7-1590-4086-9CDB-8E9635CFDAF3}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vUpdateRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{25D02836-36BE-4DB2-81EB-DAEAA0681ACF}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vUTCDate">
+      <DTS:VariableValue
+        DTS:DataType="7">12:00:00 AM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{0DFA0E7E-02CF-434B-8659-D65965964BB4}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Failed Upload - Move File to Archive Folder"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{1CB740EA-5772-46A7-8CE3-F8DA7264318F}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Failed Upload - Move File to Archive Folder"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="RenameFile"
+              TaskSourcePath="{FA0A5DDF-E188-4BD0-BD77-A3A6C98994EA}"
+              TaskDestinationPath="{2298C11D-B4E5-4A41-A1B6-22383758BEBD}" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Get Initial Row Count for the User Table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{93E28CE0-CFAB-43A9-8CFC-2EA016FAC70B}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Initial Row Count for the User Table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9F2F65CD-34E1-40EE-AC82-F011194EB813}"
+              SQLTask:SqlStatementSource="EXEC META.sp_GetRowCount ?,?,? OUTPUT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::vSchema"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::vTableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::vInitialRowCount"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Get Total Row Count for the User Table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{C77908CC-E1B4-4B98-93B0-E61C0AFD8E55}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Total Row Count for the User Table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9F2F65CD-34E1-40EE-AC82-F011194EB813}"
+              SQLTask:SqlStatementSource="EXEC META.sp_GetRowCount ?,?,? OUTPUT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::vSchema"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::vTableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::vTotalRowCount"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Initialize Audit"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{09FA9095-5D72-469C-A5C6-C671F6D45F8E}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initialize Audit"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9F2F65CD-34E1-40EE-AC82-F011194EB813}"
+              SQLTask:SqlStatementSource="EXEC META.sp_AuditBatchLoad_Insert ?,?,? OUTPUT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::vTableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::vInitialRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::vAuditBatchLoadID"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Move Data from Source to DB"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{F98CD2CA-BBAC-407B-AC4E-AF1BAE0AE5E1}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:ISOLevel="256"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Move Data from Source to DB"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:TransactionOption="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              defaultBufferMaxRows="30000"
+              defaultBufferSize="104857600"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[status]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="status"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[status]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[externalID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="externalID"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[externalID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[EvidenceID]"
+                          cachedDataType="wstr"
+                          cachedLength="36"
+                          cachedName="EvidenceID"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[EvidenceID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[EvidenceType]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="EvidenceType"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[EvidenceType]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[title]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="title"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[title]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[description]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1000"
+                          cachedName="description"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[description]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[recordedOn]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="recordedOn"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[recordedOn]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[uploadedOn]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="uploadedOn"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[uploadedOn]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[restrictionLevel]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="restrictionLevel"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[restrictionLevel]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[modifiedOn]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="modifiedOn"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[modifiedOn]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[duration]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="duration"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[duration]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[size]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="size"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[size]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[fileType]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="fileType"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[fileType]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[notes]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="notes"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[notes]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[deletionTime]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="deletionTime"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[deletionTime]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ExternalID]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ExternalID]"
+                          name="Copy of ExternalID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[externalID]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of status]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="20"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of status]"
+                          name="Copy of status"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[status]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EvidenceID]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="36"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EvidenceID]"
+                          name="Copy of EvidenceID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[EvidenceID]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EvidenceType]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="8"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EvidenceType]"
+                          name="Copy of EvidenceType"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[EvidenceType]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of title]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="200"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of title]"
+                          name="Copy of title"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[title]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of description]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="1000"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of description]"
+                          name="Copy of description"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[description]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of recordedOn]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of recordedOn]"
+                          name="Copy of recordedOn"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[recordedOn]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of uploadedOn]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of uploadedOn]"
+                          name="Copy of uploadedOn"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[uploadedOn]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of restrictionLevel]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of restrictionLevel]"
+                          name="Copy of restrictionLevel"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[restrictionLevel]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of modifiedOn]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of modifiedOn]"
+                          name="Copy of modifiedOn"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[modifiedOn]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of duration]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of duration]"
+                          name="Copy of duration"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[duration]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of size]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of size]"
+                          name="Copy of size"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[size]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of fileType]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="20"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of fileType]"
+                          name="Copy of fileType"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[fileType]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of notes]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="100"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of notes]"
+                          name="Copy of notes"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[notes]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of deletionTime]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of deletionTime]"
+                          name="Copy of deletionTime"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[deletionTime]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="From CSV in Share"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Souce Data CSV File Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Souce Data CSV File Connection Manager]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[status]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[status]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[status]"
+                          name="status"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[externalID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[externalId]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[externalID]"
+                          name="externalID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[EvidenceID]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[EvidenceID]"
+                          length="36"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[EvidenceID]"
+                          name="EvidenceID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[EvidenceType]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[EvidenceType]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[EvidenceType]"
+                          name="EvidenceType"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[title]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[title]"
+                          length="200"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[title]"
+                          name="title"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[description]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[description]"
+                          length="1000"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[description]"
+                          name="description"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[recordedOn]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[recordedOn]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[recordedOn]"
+                          name="recordedOn"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[uploadedOn]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[uploadedOn]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[uploadedOn]"
+                          name="uploadedOn"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[modifiedOn]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[modifiedOn]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[modifiedOn]"
+                          name="modifiedOn"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[duration]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[duration]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[duration]"
+                          name="duration"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[size]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[size]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[size]"
+                          name="size"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[fileType]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[fileType]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[fileType]"
+                          name="fileType"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[notes]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[notes]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[notes]"
+                          name="notes"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[deletionTime]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[deletionTime]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[deletionTime]"
+                          name="deletionTime"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[location]"
+                          codePage="1252"
+                          dataType="text"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[location]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[location]"
+                          name="location"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[sourceChannel]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[sourceChannel]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[sourceChannel]"
+                          name="sourceChannel"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[storageTier]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[storageTier]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[storageTier]"
+                          name="storageTier"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[contentType]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[contentType]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[contentType]"
+                          name="contentType"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[evidenceCaseIds]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[evidenceCaseIds]"
+                          length="2000"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[evidenceCaseIds]"
+                          name="evidenceCaseIds"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[restrictionLevel]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[restrictionLevel]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].Columns[restrictionLevel]"
+                          name="restrictionLevel"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[status]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="status" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[externalId]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="externalId" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[EvidenceID]"
+                          dataType="wstr"
+                          length="36"
+                          name="EvidenceID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[EvidenceType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="EvidenceType" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[title]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="title" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1000"
+                          name="description" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[recordedOn]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="recordedOn" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[uploadedOn]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="uploadedOn" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[modifiedOn]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="modifiedOn" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[duration]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="duration" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[size]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="size" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[fileType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="fileType" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[notes]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="notes" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[deletionTime]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="deletionTime" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[location]"
+                          codePage="1252"
+                          dataType="text"
+                          name="location" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[sourceChannel]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="sourceChannel" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[storageTier]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="storageTier" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[contentType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="contentType" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[evidenceCaseIds]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2000"
+                          name="evidenceCaseIds" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output].ExternalColumns[restrictionLevel]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="restrictionLevel" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Insert AuditBatchLoadID"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Output].Columns[AuditBatchLoadID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Output].Columns[AuditBatchLoadID]"
+                          name="AuditBatchLoadID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::vAuditBatchLoadID]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::vAuditBatchLoadID]</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Output].Columns[LocationBlank]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Output].Columns[LocationBlank]"
+                          name="LocationBlank"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">""</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">""</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table"
+                  componentClassID="Microsoft.OLEDBCommand"
+                  contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+                  description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+                  name="Update Record in DB Table"
+                  usesDispositions="true"
+                  version="2">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC Meta.sp_UpdateSPPDBWCEvidenceAttributesTable ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Connections[OleDbConnection]"
+                      connectionManagerID="{9F2F65CD-34E1-40EE-AC82-F011194EB813}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[stpaul-sql-dimx.SPPDBWC]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input]"
+                      errorOrTruncationOperation="Command Execution"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Command Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[AuditBatchLoadID]"
+                          cachedDataType="i4"
+                          cachedName="AuditBatchLoadID"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@NewAuditBatchLoadID]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Output].Columns[AuditBatchLoadID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of uploadedOn]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Copy of uploadedOn"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@UploadedOn]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of uploadedOn]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of notes]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="Copy of notes"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Notes]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of notes]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of fileType]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="Copy of fileType"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@FileType]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of fileType]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of size]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Copy of size"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Size]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of size]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of duration]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="Copy of duration"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Duration]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of duration]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of modifiedOn]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Copy of modifiedOn"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@ModifiedOn]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of modifiedOn]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of restrictionLevel]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Copy of restrictionLevel"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@RestrictionLevel]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of restrictionLevel]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of deletionTime]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Copy of deletionTime"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@DeletionTime]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of deletionTime]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of description]"
+                          cachedDataType="wstr"
+                          cachedLength="1000"
+                          cachedName="Copy of description"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Description]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of description]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of title]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="Copy of title"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Title]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of title]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of EvidenceType]"
+                          cachedDataType="wstr"
+                          cachedLength="8"
+                          cachedName="Copy of EvidenceType"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EvidenceType]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EvidenceType]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of recordedOn]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Copy of recordedOn"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@RecordedOn]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of recordedOn]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of status]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="Copy of status"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Status]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of status]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of EvidenceID]"
+                          cachedDataType="wstr"
+                          cachedLength="36"
+                          cachedName="Copy of EvidenceID"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EvidenceID]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EvidenceID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of ExternalID]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Copy of ExternalID"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@ExternalID]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ExternalID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[LocationBlank]"
+                          cachedDataType="wstr"
+                          cachedName="LocationBlank"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Location]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Output].Columns[LocationBlank]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@ExternalID]"
+                          dataType="wstr"
+                          length="50"
+                          name="@ExternalID">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Status]"
+                          dataType="wstr"
+                          length="20"
+                          name="@Status">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@NewAuditBatchLoadID]"
+                          dataType="i4"
+                          name="@NewAuditBatchLoadID">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">81</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EvidenceID]"
+                          dataType="wstr"
+                          length="36"
+                          name="@EvidenceID">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EvidenceType]"
+                          dataType="wstr"
+                          length="8"
+                          name="@EvidenceType">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Title]"
+                          dataType="wstr"
+                          length="200"
+                          name="@Title">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Description]"
+                          dataType="wstr"
+                          length="1000"
+                          name="@Description">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@RecordedOn]"
+                          dataType="wstr"
+                          length="50"
+                          name="@RecordedOn">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@UploadedOn]"
+                          dataType="wstr"
+                          length="50"
+                          name="@UploadedOn">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@RestrictionLevel]"
+                          dataType="i2"
+                          name="@RestrictionLevel">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">81</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@ModifiedOn]"
+                          dataType="wstr"
+                          length="50"
+                          name="@ModifiedOn">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Duration]"
+                          dataType="wstr"
+                          length="10"
+                          name="@Duration">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">81</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Size]"
+                          dataType="wstr"
+                          length="50"
+                          name="@Size">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">81</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@FileType]"
+                          dataType="wstr"
+                          length="20"
+                          name="@FileType">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Notes]"
+                          dataType="wstr"
+                          length="100"
+                          name="@Notes">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@DeletionTime]"
+                          dataType="wstr"
+                          length="50"
+                          name="@DeletionTime">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@Location]"
+                          dataType="nText"
+                          name="@Location">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Outputs[OLE DB Command Output]"
+                      exclusionGroup="1"
+                      name="OLE DB Command Output"
+                      synchronousInputId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Outputs[OLE DB Command Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Command Error Output"
+                      synchronousInputId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Move Data from Source to DB.Paths[Data Conversion Output]"
+                  endId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Inputs[Derived Column Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Sequence Container\Move Data from Source to DB.Paths[Derived Column Output]"
+                  endId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\Move Data from Source to DB.Paths[Flat File Source Output]"
+                  endId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Sequence Container\Move Data from Source to DB\From CSV in Share.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Populate vUTCDate Variable"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{85F37BD1-3059-43BB-A501-99E0B5640822}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Populate vUTCDate Variable"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::vUTCDate] =  GETUTCDATE()" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Successful Upload - Move File to Archive Folder"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{1F5EE689-4D7C-48E9-9AFE-0FF8C2AABE85}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Successful Upload - Move File to Archive Folder"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="RenameFile"
+              TaskSourcePath="{FA0A5DDF-E188-4BD0-BD77-A3A6C98994EA}"
+              TaskDestinationPath="{98D7D787-E034-459E-94EC-FEC7ABF79CE7}" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Update Audit"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{57D656BF-153A-4FB7-9CE3-05DC3095D96E}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Audit"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9F2F65CD-34E1-40EE-AC82-F011194EB813}"
+              SQLTask:SqlStatementSource="exec Meta.sp_AuditBatchLoad_Update ?,?,?,?,?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::vTotalRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::vInsertRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::vUpdateRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::vDeleteRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="User::vErrorRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="User::vDuplicateRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="6"
+                SQLTask:DtsVariableName="User::vEndingRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="7"
+                SQLTask:DtsVariableName="User::vAuditBatchLoadID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{04D0F95C-EF0A-455A-8F7B-37A1BA42371A}"
+          DTS:From="Package\Sequence Container\Get Initial Row Count for the User Table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\Populate vUTCDate Variable" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{99AAA58A-1404-4320-B98F-C50C44FE6D89}"
+          DTS:From="Package\Sequence Container\Populate vUTCDate Variable"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Sequence Container\Initialize Audit" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{703FEBA7-A246-4043-9EF9-77ECC6A33398}"
+          DTS:From="Package\Sequence Container\Initialize Audit"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Sequence Container\Move Data from Source to DB" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{2F885531-A126-4D12-A526-DC8EC45515D4}"
+          DTS:From="Package\Sequence Container\Move Data from Source to DB"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Sequence Container\Get Total Row Count for the User Table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{60A22E02-20AE-45AB-8D8E-99121C8D9ACD}"
+          DTS:From="Package\Sequence Container\Update Audit"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Sequence Container\Successful Upload - Move File to Archive Folder" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{F407F164-1F28-41A0-987E-F4E3D6AFFF2E}"
+          DTS:From="Package\Sequence Container\Move Data from Source to DB"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 6"
+          DTS:To="Package\Sequence Container\Failed Upload - Move File to Archive Folder"
+          DTS:Value="1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 7]"
+          DTS:CreationName=""
+          DTS:DTSID="{1CF42118-CA15-424B-8629-F7A6054982A7}"
+          DTS:From="Package\Sequence Container\Get Total Row Count for the User Table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 7"
+          DTS:To="Package\Sequence Container\Update Audit" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="280,41.6"
+          Id="Package\Sequence Container\Failed Upload - Move File to Archive Folder"
+          TopLeft="499,741" />
+        <NodeLayout
+          Size="268,41.6"
+          Id="Package\Sequence Container\Get Initial Row Count for the User Table"
+          TopLeft="74.7142857142858,39" />
+        <NodeLayout
+          Size="264.8,41.6"
+          Id="Package\Sequence Container\Get Total Row Count for the User Table"
+          TopLeft="30.8095238095239,625" />
+        <NodeLayout
+          Size="145.6,41.6"
+          Id="Package\Sequence Container\Initialize Audit"
+          TopLeft="131.714285714286,262.333333333333" />
+        <NodeLayout
+          Size="220,41.6"
+          Id="Package\Sequence Container\Move Data from Source to DB"
+          TopLeft="90.7142857142858,374.666666666667" />
+        <NodeLayout
+          Size="211.2,41.6"
+          Id="Package\Sequence Container\Populate vUTCDate Variable"
+          TopLeft="99.2142857142858,150.666666666667" />
+        <NodeLayout
+          Size="300.8,41.6"
+          Id="Package\Sequence Container\Successful Upload - Move File to Archive Folder"
+          TopLeft="12.8095238095239,822" />
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\Sequence Container\Update Audit"
+          TopLeft="93.3095238095239,723.5" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="207.964285714286,81">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69.666666666667"
+              Start="0,0"
+              End="0,62.166666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.166666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="204.714285714286,192.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69.6666666666667"
+              Start="0,0"
+              End="0,62.1666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.1666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="202.714285714286,304.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,70.333333333334"
+              Start="0,0"
+              End="0,62.833333333334">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.833333333334" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          TopLeft="164.345238095238,416.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,208.333333333333"
+              Start="0,0"
+              End="0,200.833333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,200.833333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 5]"
+          TopLeft="163.309523809524,765.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.5"
+              Start="0,0"
+              End="0,49">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 6]"
+          TopLeft="236.047619047619,416.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="402.952380952381,324.333333333333"
+              Start="0,0"
+              End="402.952380952381,316.833333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,127.138387484958" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,127.138387484958"
+                    Point2="0,131.138387484958"
+                    Point3="4,131.138387484958" />
+                  <mssgle:LineSegment
+                    End="398.952380952381,131.138387484958" />
+                  <mssgle:CubicBezierSegment
+                    Point1="398.952380952381,131.138387484958"
+                    Point2="402.952380952381,131.138387484958"
+                    Point3="402.952380952381,135.138387484958" />
+                  <mssgle:LineSegment
+                    End="402.952380952381,316.833333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="186.234842819941,136.138387484958,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 7]"
+          TopLeft="163.309523809524,667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.5"
+              Start="0,0"
+              End="0,49">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="822.4,1064"
+          Size="822.4,1107.2"
+          Id="Package\Sequence Container"
+          TopLeft="20,14" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Move Data from Source to DB">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Sequence Container\Move Data from Source to DB\From CSV in Share"
+          TopLeft="204.755555555556,40" />
+        <NodeLayout
+          Size="193.6,41.6"
+          Id="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID"
+          TopLeft="191.255555555556,290" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Sequence Container\Move Data from Source to DB\Data Conversion"
+          TopLeft="210.255555555556,165" />
+        <NodeLayout
+          Size="206.4,41.6"
+          Id="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table"
+          TopLeft="185.255555555556,415" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Move Data from Source to DB.Paths[Data Conversion Output]"
+          TopLeft="288.255555555556,207">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,83"
+              Start="0,0"
+              End="0,75.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,75.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Move Data from Source to DB.Paths[Flat File Source Output]"
+          TopLeft="288.255555555556,82">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,83"
+              Start="0,0"
+              End="0,75.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,75.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Move Data from Source to DB.Paths[Derived Column Output]"
+          TopLeft="288.255555555556,332">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,83"
+              Start="0,0"
+              End="0,75.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,75.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

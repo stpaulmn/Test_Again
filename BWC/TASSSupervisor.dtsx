@@ -1,0 +1,2451 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/30/2018 8:02:55 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="OT17-S270-A006"
+  DTS:CreatorName="STPAUL\engelkin"
+  DTS:DTSID="{B55A00CD-E099-4D44-B5AE-7DB65D9FAA62}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="TASSSupervisor"
+  DTS:PackageType="5"
+  DTS:VersionBuild="66"
+  DTS:VersionGUID="{D78573AD-93A3-4B5A-A863-E78677FF0B03}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[tassdbs.VTI]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2FF63C41-21C8-4E35-8AEE-D13DF922CFF5}"
+      DTS:ObjectName="tassdbs.VTI">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=tassdbs;Initial Catalog=VTI;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{84116BD3-D6EA-4DD6-B83C-CA67C07E155E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vAuditBatchLoadID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3AE741D6-53DC-4F7B-B1F5-8BC4B1A4F0D3}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vDeleteRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C3E0B075-312A-43EA-AC2A-49243B924D6E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vDuplicateRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D3608FFC-0D00-4BE0-A64D-DAE37D33E7AB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vEndingRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C7EE1D56-F424-4365-BC07-7BE85D009C56}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vErrorRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3ADF2829-7DED-46A0-81F7-5DBB976A914C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vInitialRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6CA87A4D-83B8-4C5A-A46E-8E43CED21F49}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vInsertRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{73C071C2-3C4E-44F3-9214-C5E1219577F7}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;SELECT ISNULL(DATEADD(WEEK,-1,CAST(MAX(SourceModifyDateUTC) AS DATE)),'1/1/1900') AS ModifyDateCheck FROM &quot; + @[User::vSchema]  + &quot;.&quot; + @[User::vTableName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vMaxModifyDateQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT ISNULL(DATEADD(WEEK,-1,CAST(MAX(SourceModifyDateUTC) AS DATE)),'1/1/1900') AS ModifyDateCheck FROM dbo.TASSSupervisor</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8D7E9B2E-EAE4-4EB3-A5EE-6EFE5CFCED9A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vMaxModifyDateUTC">
+      <DTS:VariableValue
+        DTS:DataType="7">12:00:00 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{003CB01A-671F-4973-9948-10E838029B10}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vSchema">
+      <DTS:VariableValue
+        DTS:DataType="8">dbo</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EA81B20C-98DF-4429-BE12-1E0E3E9DE153}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vTableName">
+      <DTS:VariableValue
+        DTS:DataType="8">TASSSupervisor</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FAA964C6-41D4-4826-A8CB-6D0446A21061}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vTotalRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EE4FBD8D-A88A-4ABA-8B79-5E5BB9159650}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vUpdateRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{618B800E-6957-4256-BD0B-B5D54C406AD6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vUTCDate">
+      <DTS:VariableValue
+        DTS:DataType="7">12:00:00 AM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{BA8A07D2-2E67-4F62-9F74-94FF8CB3354B}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Find Current Max Modify Date from Source"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{96E9B8E1-DEB0-4AD6-BBDB-6A782132574A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Find Current Max Modify Date from Source"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9F2F65CD-34E1-40EE-AC82-F011194EB813}"
+              SQLTask:SqlStatementSource="User::vMaxModifyDateQuery"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::vMaxModifyDateUTC" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Get Initial Row Count for the User Table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2054E4E2-382F-4270-B728-A733278CA39D}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Initial Row Count for the User Table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9F2F65CD-34E1-40EE-AC82-F011194EB813}"
+              SQLTask:SqlStatementSource="EXEC META.sp_GetRowCount ?,?,? OUTPUT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::vSchema"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::vTableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::vInitialRowCount"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Get Total Row Count for the User Table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{D79CE726-C250-415C-86B7-313038CBCB7E}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Total Row Count for the User Table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9F2F65CD-34E1-40EE-AC82-F011194EB813}"
+              SQLTask:SqlStatementSource="EXEC META.sp_GetRowCount ?,?,? OUTPUT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::vSchema"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::vTableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::vTotalRowCount"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Initialize Audit"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{BA7956CC-C1C6-44A0-947D-CBDD64269B88}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initialize Audit"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9F2F65CD-34E1-40EE-AC82-F011194EB813}"
+              SQLTask:SqlStatementSource="EXEC META.sp_AuditBatchLoad_Insert ?,?,? OUTPUT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::vTableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::vInitialRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::vAuditBatchLoadID"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Move Data from Source to DB"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{CC522678-6E69-49C4-850A-2860354C395D}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Move Data from Source to DB"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[EmpStatus]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="EmpStatus"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpStatus]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[EmpNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="EmpNumber"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpNumber]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[CustomID5]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="CustomID5"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID5]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[CustomID4]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="CustomID4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID4]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[ADUserID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="ADUserID"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[ADUserID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[EmpPosition]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="EmpPosition"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpPosition]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[SupervisorName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="SupervisorName"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[SupervisorName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[SupervisorEmpNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="SupervisorEmpNumber"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[SupervisorEmpNumber]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[eMail]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="eMail"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[eMail]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[OrgLevel3]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="6"
+                          cachedName="OrgLevel3"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[OrgLevel3]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[OrgLevel2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="6"
+                          cachedName="OrgLevel2"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[OrgLevel2]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[OrgLevel1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="6"
+                          cachedName="OrgLevel1"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[OrgLevel1]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[EmpName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="EmpName"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[SupervisorAppointment]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="SupervisorAppointment"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[SupervisorAppointment]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[CustomID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="CustomID"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[CustomID2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="CustomID2"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID2]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input].Columns[CustomID3]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="CustomID3"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID3]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID]"
+                          name="Copy of CustomID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID5]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID5]"
+                          name="Copy of CustomID5"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID5]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID4]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID4]"
+                          name="Copy of CustomID4"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID4]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ADUserID]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ADUserID]"
+                          name="Copy of ADUserID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[ADUserID]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmpStatus]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="100"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmpStatus]"
+                          name="Copy of EmpStatus"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpStatus]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmpPosition]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="100"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmpPosition]"
+                          name="Copy of EmpPosition"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpPosition]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID2]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID2]"
+                          name="Copy of CustomID2"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID2]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmpNumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmpNumber]"
+                          name="Copy of EmpNumber"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpNumber]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SupervisorAppointment]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SupervisorAppointment]"
+                          name="Copy of SupervisorAppointment"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[SupervisorAppointment]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SupervisorEmpNumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SupervisorEmpNumber]"
+                          name="Copy of SupervisorEmpNumber"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[SupervisorEmpNumber]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of eMail]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="200"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of eMail]"
+                          name="Copy of eMail"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[eMail]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrgLevel3]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="6"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrgLevel3]"
+                          name="Copy of OrgLevel3"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[OrgLevel3]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrgLevel2]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="6"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrgLevel2]"
+                          name="Copy of OrgLevel2"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[OrgLevel2]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrgLevel1]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="6"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrgLevel1]"
+                          name="Copy of OrgLevel1"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[OrgLevel1]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmpName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="200"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmpName]"
+                          name="Copy of EmpName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpName]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SupervisorName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="200"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SupervisorName]"
+                          name="Copy of SupervisorName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[SupervisorName]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID3]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID3]"
+                          name="Copy of CustomID3"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID3]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Insert AuditBatchLoadID"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Output].Columns[AuditBatchLoadID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Output].Columns[AuditBatchLoadID]"
+                          name="AuditBatchLoadID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::vAuditBatchLoadID]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::vAuditBatchLoadID]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Move Data from Source to DB\Tass Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Tass Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [EmpNumber]
+      ,[EmpName]
+      ,[OrgLevel1]
+      ,[OrgLevel2]
+      ,[OrgLevel3]
+      ,[eMail]
+      ,[SupervisorEmpNumber]
+      ,[SupervisorAppointment]
+      ,[SupervisorName]
+      ,[EffectiveDate]
+      ,[EmpPosition]
+      ,[EmpStatus]
+      ,[LastModified]
+      ,[ADUserID]
+      ,[CustomID] 
+      ,[CustomID2] 
+      ,[CustomID3]
+      ,[CustomID4]
+      ,[CustomID5]
+  FROM [VTI].[dbo].[vwEmployee]
+  where OrgLevel1 = 23</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[tassdbs.VTI]"
+                      connectionManagerRefId="Package.ConnectionManagers[tassdbs.VTI]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[EmpNumber]"
+                          length="10"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpNumber]"
+                          name="EmpNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[EmpName]"
+                          length="200"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpName]"
+                          name="EmpName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[OrgLevel1]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[OrgLevel1]"
+                          length="6"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[OrgLevel1]"
+                          name="OrgLevel1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[OrgLevel2]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[OrgLevel2]"
+                          length="6"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[OrgLevel2]"
+                          name="OrgLevel2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[OrgLevel3]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[OrgLevel3]"
+                          length="6"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[OrgLevel3]"
+                          name="OrgLevel3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[eMail]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[eMail]"
+                          length="200"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[eMail]"
+                          name="eMail"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[SupervisorEmpNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[SupervisorEmpNumber]"
+                          length="10"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[SupervisorEmpNumber]"
+                          name="SupervisorEmpNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[SupervisorAppointment]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[SupervisorAppointment]"
+                          length="10"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[SupervisorAppointment]"
+                          name="SupervisorAppointment"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[SupervisorName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[SupervisorName]"
+                          length="200"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[SupervisorName]"
+                          name="SupervisorName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EffectiveDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[EffectiveDate]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EffectiveDate]"
+                          name="EffectiveDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpPosition]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[EmpPosition]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpPosition]"
+                          name="EmpPosition"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpStatus]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[EmpStatus]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EmpStatus]"
+                          name="EmpStatus"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[LastModified]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[LastModified]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[LastModified]"
+                          name="LastModified"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[ADUserID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[ADUserID]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[ADUserID]"
+                          name="ADUserID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID4]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[CustomID4]"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID4]"
+                          name="CustomID4"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID5]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[CustomID5]"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID5]"
+                          name="CustomID5"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[CustomID]"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID]"
+                          name="CustomID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID2]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[CustomID2]"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID2]"
+                          name="CustomID2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID3]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[CustomID3]"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[CustomID3]"
+                          name="CustomID3"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[EmpNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="EmpNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[EmpName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="EmpName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[OrgLevel1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="6"
+                          name="OrgLevel1" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[OrgLevel2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="6"
+                          name="OrgLevel2" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[OrgLevel3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="6"
+                          name="OrgLevel3" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[eMail]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="eMail" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[SupervisorEmpNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="SupervisorEmpNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[SupervisorAppointment]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="SupervisorAppointment" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[SupervisorName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="SupervisorName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[EffectiveDate]"
+                          dataType="dbTimeStamp"
+                          name="EffectiveDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[EmpPosition]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="EmpPosition" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[EmpStatus]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="EmpStatus" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[LastModified]"
+                          dataType="dbTimeStamp"
+                          name="LastModified" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[ADUserID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ADUserID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[CustomID4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="CustomID4" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[CustomID5]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="CustomID5" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[CustomID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="CustomID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[CustomID2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="CustomID2" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].ExternalColumns[CustomID3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="CustomID3" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[EmpNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[EmpNumber]"
+                          name="EmpNumber" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[EmpName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[EmpName]"
+                          name="EmpName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[OrgLevel1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="6"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[OrgLevel1]"
+                          name="OrgLevel1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[OrgLevel2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="6"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[OrgLevel2]"
+                          name="OrgLevel2" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[OrgLevel3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="6"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[OrgLevel3]"
+                          name="OrgLevel3" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[eMail]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[eMail]"
+                          name="eMail" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[SupervisorEmpNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[SupervisorEmpNumber]"
+                          name="SupervisorEmpNumber" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[SupervisorAppointment]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[SupervisorAppointment]"
+                          name="SupervisorAppointment" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[SupervisorName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[SupervisorName]"
+                          name="SupervisorName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[EffectiveDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[EffectiveDate]"
+                          name="EffectiveDate" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[EmpPosition]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[EmpPosition]"
+                          name="EmpPosition" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[EmpStatus]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[EmpStatus]"
+                          name="EmpStatus" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[LastModified]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[LastModified]"
+                          name="LastModified" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[ADUserID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[ADUserID]"
+                          name="ADUserID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[CustomID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[CustomID]"
+                          name="CustomID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[CustomID2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[CustomID2]"
+                          name="CustomID2" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[CustomID3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[CustomID3]"
+                          name="CustomID3" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[CustomID4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[CustomID4]"
+                          name="CustomID4" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[CustomID5]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[CustomID5]"
+                          name="CustomID5" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table"
+                  componentClassID="Microsoft.OLEDBCommand"
+                  contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+                  description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+                  name="Update Record in DB Table"
+                  usesDispositions="true"
+                  version="2">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC Meta.sp_UpdateSPPDBWCTASSSupervisorTable  ?, ? ,?, ?, ?, ?, ? ,?, ?, ?, ?, ? ,?, ?, ?, ?, ? ,?, ?, ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Connections[OleDbConnection]"
+                      connectionManagerID="{9F2F65CD-34E1-40EE-AC82-F011194EB813}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[stpaul-sql-dimx.SPPDBWC]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input]"
+                      errorOrTruncationOperation="Command Execution"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Command Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[AuditBatchLoadID]"
+                          cachedDataType="i4"
+                          cachedName="AuditBatchLoadID"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@NewAuditBatchLoadID]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Output].Columns[AuditBatchLoadID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of EmpNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="Copy of EmpNumber"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EmpNumber]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmpNumber]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of EmpName]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="Copy of EmpName"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EmpName]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmpName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of OrgLevel1]"
+                          cachedDataType="wstr"
+                          cachedLength="6"
+                          cachedName="Copy of OrgLevel1"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@OrgLevel1]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrgLevel1]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of OrgLevel2]"
+                          cachedDataType="wstr"
+                          cachedLength="6"
+                          cachedName="Copy of OrgLevel2"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@OrgLevel2]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrgLevel2]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of OrgLevel3]"
+                          cachedDataType="wstr"
+                          cachedLength="6"
+                          cachedName="Copy of OrgLevel3"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@OrgLevel3]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrgLevel3]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of eMail]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="Copy of eMail"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@eMail]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of eMail]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of SupervisorEmpNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="Copy of SupervisorEmpNumber"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@SupervisorEmpNumber]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SupervisorEmpNumber]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of SupervisorAppointment]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="Copy of SupervisorAppointment"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@SupervisorAppointment]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SupervisorAppointment]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of SupervisorName]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="Copy of SupervisorName"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@SupervisorName]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SupervisorName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[EffectiveDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="EffectiveDate"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EffectiveDate]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[EffectiveDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of EmpPosition]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="Copy of EmpPosition"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EmpPosition]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmpPosition]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of EmpStatus]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="Copy of EmpStatus"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EmpStatus]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmpStatus]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[LastModified]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="LastModified"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@LastModified]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output].Columns[LastModified]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of ADUserID]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Copy of ADUserID"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@ADUserID]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ADUserID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of CustomID]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Copy of CustomID"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@CustomID]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of CustomID2]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Copy of CustomID2"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@CustomID2]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID2]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of CustomID3]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Copy of CustomID3"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@CustomID3]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID3]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of CustomID4]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Copy of CustomID4"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@CustomID4]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID4]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].Columns[Copy of CustomID5]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Copy of CustomID5"
+                          externalMetadataColumnId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@CustomID5]"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomID5]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@NewAuditBatchLoadID]"
+                          dataType="i4"
+                          name="@NewAuditBatchLoadID">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">81</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EmpNumber]"
+                          dataType="wstr"
+                          length="10"
+                          name="@EmpNumber">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EmpName]"
+                          dataType="wstr"
+                          length="200"
+                          name="@EmpName">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@OrgLevel1]"
+                          dataType="wstr"
+                          length="6"
+                          name="@OrgLevel1">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@OrgLevel2]"
+                          dataType="wstr"
+                          length="6"
+                          name="@OrgLevel2">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@OrgLevel3]"
+                          dataType="wstr"
+                          length="6"
+                          name="@OrgLevel3">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@eMail]"
+                          dataType="wstr"
+                          length="200"
+                          name="@eMail">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@SupervisorEmpNumber]"
+                          dataType="wstr"
+                          length="10"
+                          name="@SupervisorEmpNumber">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@SupervisorAppointment]"
+                          dataType="wstr"
+                          length="10"
+                          name="@SupervisorAppointment">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@SupervisorName]"
+                          dataType="wstr"
+                          length="200"
+                          name="@SupervisorName">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EffectiveDate]"
+                          dataType="dbTimeStamp2"
+                          name="@EffectiveDate"
+                          scale="7">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">1073741889</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EmpPosition]"
+                          dataType="wstr"
+                          length="100"
+                          name="@EmpPosition">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@EmpStatus]"
+                          dataType="wstr"
+                          length="100"
+                          name="@EmpStatus">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@LastModified]"
+                          dataType="dbTimeStamp2"
+                          name="@LastModified"
+                          scale="7">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">1073741889</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@ADUserID]"
+                          dataType="wstr"
+                          length="50"
+                          name="@ADUserID">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@CustomID]"
+                          dataType="wstr"
+                          length="30"
+                          name="@CustomID">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@CustomID2]"
+                          dataType="wstr"
+                          length="30"
+                          name="@CustomID2">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@CustomID3]"
+                          dataType="wstr"
+                          length="30"
+                          name="@CustomID3">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@CustomID4]"
+                          dataType="wstr"
+                          length="30"
+                          name="@CustomID4">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input].ExternalColumns[@CustomID5]"
+                          dataType="wstr"
+                          length="30"
+                          name="@CustomID5">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Outputs[OLE DB Command Output]"
+                      exclusionGroup="1"
+                      name="OLE DB Command Output"
+                      synchronousInputId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Outputs[OLE DB Command Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Command Error Output"
+                      synchronousInputId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Move Data from Source to DB.Paths[Data Conversion Output]"
+                  endId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Inputs[Derived Column Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Sequence Container\Move Data from Source to DB.Paths[Derived Column Output]"
+                  endId="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table.Inputs[OLE DB Command Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\Move Data from Source to DB.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\Move Data from Source to DB\Data Conversion.Inputs[Data Conversion Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\Move Data from Source to DB\Tass Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Populate vUTCDate Variable"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{99AE9C2E-6391-4A51-A77B-2F7FB3573509}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Populate vUTCDate Variable"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::vUTCDate] =  GETUTCDATE()" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Update Audit"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{8208C211-918C-4E9B-99ED-B4FE9F179284}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Audit"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9F2F65CD-34E1-40EE-AC82-F011194EB813}"
+              SQLTask:SqlStatementSource="exec Meta.sp_AuditBatchLoad_Update ?,?,?,?,?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::vTotalRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::vInsertRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::vUpdateRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::vDeleteRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="User::vErrorRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="User::vDuplicateRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="6"
+                SQLTask:DtsVariableName="User::vEndingRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="7"
+                SQLTask:DtsVariableName="User::vAuditBatchLoadID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Update Audit - Failed"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{b9978c9b-605a-4248-8668-719f82a5740c}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Audit - Failed"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9F2F65CD-34E1-40EE-AC82-F011194EB813}"
+              SQLTask:SqlStatementSource="exec Meta.sp_AuditBatchLoad_FailedUpdate ?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::vTotalRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::vEndingRowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::vAuditBatchLoadID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{AB7105A2-79F2-4E36-90E5-E38D9CA5A481}"
+          DTS:From="Package\Sequence Container\Get Initial Row Count for the User Table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\Populate vUTCDate Variable" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{0ED2747C-D8DF-4E49-B73E-9509EED15050}"
+          DTS:From="Package\Sequence Container\Populate vUTCDate Variable"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Sequence Container\Initialize Audit" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{7240A480-2612-441A-84E4-2A0CEDEAB519}"
+          DTS:From="Package\Sequence Container\Initialize Audit"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Sequence Container\Find Current Max Modify Date from Source" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{EAAD3012-0294-4C6D-A196-28B5C3941F4D}"
+          DTS:From="Package\Sequence Container\Find Current Max Modify Date from Source"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Sequence Container\Move Data from Source to DB" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{C3DC0AEC-A13C-4E63-A99F-723EA307272D}"
+          DTS:From="Package\Sequence Container\Move Data from Source to DB"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Sequence Container\Get Total Row Count for the User Table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{A8061DBF-4BDE-4213-9A11-9D7CD4A6F358}"
+          DTS:From="Package\Sequence Container\Move Data from Source to DB"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Sequence Container\Update Audit - Failed"
+          DTS:Value="1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 7]"
+          DTS:CreationName=""
+          DTS:DTSID="{68FEBA63-EE8F-4E1C-8FC0-379DCA0891A8}"
+          DTS:From="Package\Sequence Container\Get Total Row Count for the User Table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 7"
+          DTS:To="Package\Sequence Container\Update Audit" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="280,42"
+          Id="Package\Sequence Container\Find Current Max Modify Date from Source"
+          TopLeft="64.7142857142858,374" />
+        <NodeLayout
+          Size="268,42"
+          Id="Package\Sequence Container\Get Initial Row Count for the User Table"
+          TopLeft="74.7142857142858,39" />
+        <NodeLayout
+          Size="265,42"
+          Id="Package\Sequence Container\Get Total Row Count for the User Table"
+          TopLeft="34,625" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Sequence Container\Initialize Audit"
+          TopLeft="131.714285714286,262.333333333333" />
+        <NodeLayout
+          Size="220,42"
+          Id="Package\Sequence Container\Move Data from Source to DB"
+          TopLeft="94.7142857142858,485.666666666667" />
+        <NodeLayout
+          Size="211,42"
+          Id="Package\Sequence Container\Populate vUTCDate Variable"
+          TopLeft="99.2142857142858,150.666666666667" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Sequence Container\Update Audit"
+          TopLeft="91.714285714286,710.333333333333" />
+        <NodeLayout
+          Size="178,42"
+          Id="Package\Sequence Container\Update Audit - Failed"
+          TopLeft="406,712" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="207.964285714286,81">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69.666666666667"
+              Start="0,0"
+              End="0,62.166666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.166666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="204.714285714286,192.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69.6666666666667"
+              Start="0,0"
+              End="0,62.1666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.1666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="204.714285714286,304.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69.6666666666667"
+              Start="0,0"
+              End="0,62.1666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.1666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="204.714285714286,416">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69.6666666666667"
+              Start="0,0"
+              End="0,62.1666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.1666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          TopLeft="167.940476190476,527.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,97.333333333333"
+              Start="0,0"
+              End="0,89.833333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,89.833333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 5]"
+          TopLeft="240.047619047619,527.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="254.952380952381,184.333333333333"
+              Start="0,0"
+              End="254.952380952381,176.833333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,70.5318892900119" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,70.5318892900119"
+                    Point2="0,74.5318892900119"
+                    Point3="4,74.5318892900119" />
+                  <mssgle:LineSegment
+                    End="250.952380952381,74.5318892900119" />
+                  <mssgle:CubicBezierSegment
+                    Point1="250.952380952381,74.5318892900119"
+                    Point2="254.952380952381,74.5318892900119"
+                    Point3="254.952380952381,78.5318892900119" />
+                  <mssgle:LineSegment
+                    End="254.952380952381,176.833333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="112.23484281994,79.5318892900119,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 7]"
+          TopLeft="164.107142857143,667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.333333333333"
+              Start="0,0"
+              End="0,35.833333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.833333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="822,1104"
+          Size="822,1147"
+          Id="Package\Sequence Container"
+          TopLeft="20,14" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Move Data from Source to DB">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Sequence Container\Move Data from Source to DB\Insert AuditBatchLoadID"
+          TopLeft="122,328" />
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Sequence Container\Move Data from Source to DB\Update Record in DB Table"
+          TopLeft="110,444" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Sequence Container\Move Data from Source to DB\Data Conversion"
+          TopLeft="138.266666666667,182.5" />
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Sequence Container\Move Data from Source to DB\Tass Source"
+          TopLeft="141,68" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Move Data from Source to DB.Paths[OLE DB Source Output]"
+          TopLeft="212.633333333334,110">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,72.5"
+              Start="0,0"
+              End="0,65">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Move Data from Source to DB.Paths[Derived Column Output]"
+          TopLeft="216,370">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74"
+              Start="0,0"
+              End="0,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Move Data from Source to DB.Paths[Data Conversion Output]"
+          TopLeft="217.633333333334,224.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,103.5"
+              Start="0,0"
+              End="0,96">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,96" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Move Data from Source to DB\Tass Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
